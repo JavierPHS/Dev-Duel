@@ -38,6 +38,96 @@
     text-align: center;
     
     }
+
+#label-total-stars {
+  box-sizing: border-box;
+  width: 150px;
+  height: 30px;
+  background: #E1F1FF;
+  border: 1px solid rgba(0, 0, 0, 0.75);
+  border-radius: 15px;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  
+  }
+
+#label-highest-stars {
+  box-sizing: border-box;
+  width: 150px;
+  height: 30px;
+  background: #E1F1FF;
+  border: 1px solid rgba(0, 0, 0, 0.75);
+  border-radius: 15px;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  
+}
+
+#label-public {
+  box-sizing: border-box;
+  width: 150px;
+  height: 30px;
+  background: #E1F1FF;
+  border: 1px solid rgba(0, 0, 0, 0.75);
+  border-radius: 15px;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  
+}
+
+#label-perfect {
+  box-sizing: border-box;
+  width: 150px;
+  height: 30px;
+  background: #E1F1FF;
+  border: 1px solid rgba(0, 0, 0, 0.75);
+  border-radius: 15px;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  
+}
+
+#label-followers {
+  box-sizing: border-box;
+  width: 150px;
+  height: 30px;
+  background: #E1F1FF;
+  border: 1px solid rgba(0, 0, 0, 0.75);
+  border-radius: 15px;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  
+}
+
+#label-following {
+  box-sizing: border-box;
+  width: 150px;
+  height: 30px;
+  background: #E1F1FF;
+  border: 1px solid rgba(0, 0, 0, 0.75);
+  border-radius: 15px;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  
+}
     
     .stat {
       height: 50px;

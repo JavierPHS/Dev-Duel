@@ -24,3 +24,25 @@ border-radius: 15px;
   position:relative;
   left: 5%;
 }
+
+.banners {
+  vertical-align: top;
+  display: flex;
+  flex-direction: row;
+}
+
+.banner-left {
+box-sizing: content-box;
+position: relative;
+text-align: center;
+width: 660px;
+right: 5%;
+}
+
+.banner-right {
+box-sizing: content-box;
+position: relative;
+text-align: center;
+width: 660px;
+left: 5%;
+}

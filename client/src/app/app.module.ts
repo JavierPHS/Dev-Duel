@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { TextInputComponent } from './Components/text-input/text-input.component';
 import { UserService } from 'src/user.service';
 import { CardComponent } from './Components/card/card.component';
+import { WinBannerComponent } from './Components/win-banner/win-banner.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { CardComponent } from './Components/card/card.component';
     LinkButtonComponent,
     HomeComponent,
     TextInputComponent,
-    CardComponent
+    CardComponent,
+    WinBannerComponent
   ],
   imports: [
     BrowserModule,

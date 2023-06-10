@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChildren, QueryList } from '@angular/core';
 import { UserService } from 'src/user.service';
+import { CardComponent } from '../Components/card/card.component';
 
 @Component({
   selector: 'app-duel',
@@ -9,9 +10,13 @@ import { UserService } from 'src/user.service';
 
 export class DuelComponent implements OnInit {
 
-  
+  @ViewChildren(CardComponent)
+  cards!: QueryList<CardComponent>;
+
   usernameOne: string = ""
   usernameTwo: string = ""
+  totalPointsOne: number = 0
+  totalPointsTwo: number = 0
 
   // @Input()  username: string[] = []
   // @Input()  userImageSrc: string[] = []
@@ -40,6 +45,7 @@ export class DuelComponent implements OnInit {
   @Input()  perfectReposOne: string = ""
   @Input()  userFollowersOne: string = ""
   @Input()  userFollowingOne: string = ""
+  @Input()  duelArgsOne: number[] = []
 
   @Input()  userTwo: string = ""
   @Input()  userImageSrcTwo: string = ""
@@ -54,6 +60,7 @@ export class DuelComponent implements OnInit {
   @Input()  perfectReposTwo: string = ""
   @Input()  userFollowersTwo: string = ""
   @Input()  userFollowingTwo: string = ""
+  @Input()  duelArgsTwo: number[] = []
 
   constructor(private userService: UserService) { }
 
@@ -198,8 +205,81 @@ export class DuelComponent implements OnInit {
         });
       }
       
+      this.decideWinner()
+
       } catch (error) {
         console.log('Error when fetching assigning Image and Bio');
       }
+  }
+
+  decideWinner() {
+
+    const diff1 = Number(this.totalStarsOne) - Number(this.totalStarsTwo);
+    if (diff1 > 0){
+      this.duelArgsOne.push(diff1 * 5);
+      this.duelArgsTwo.push(0);
+    } else {
+      this.duelArgsOne.push(0);
+      this.duelArgsTwo.push(diff1 * -5);
+    }
+
+    const diff2 = Number(this.highestStarsOne) - Number(this.highestStarsTwo);
+    if (diff2 > 0){
+      this.duelArgsOne.push(diff2 * 3);
+      this.duelArgsTwo.push(0);
+    } else {
+      this.duelArgsOne.push(0);
+      this.duelArgsTwo.push(diff2 * -3);
+    }
+
+    const diff3 = Number(this.publicReposOne) - Number(this.publicReposTwo);
+    if (diff3 > 0){
+      this.duelArgsOne.push(diff3 * 20);
+      this.duelArgsTwo.push(0);
+    } else {
+      this.duelArgsOne.push(0);
+      this.duelArgsTwo.push(diff3 * -20);
+    }
+
+    const diff4 = Number(this.perfectReposOne) - Number(this.perfectReposTwo);
+    if (diff4 > 0){
+      this.duelArgsOne.push(diff4 * 30);
+      this.duelArgsTwo.push(0);
+    } else {
+      this.duelArgsOne.push(0);
+      this.duelArgsTwo.push(diff4 * -30);
+    }
+
+    const diff5 = Number(this.userFollowersOne) - Number(this.userFollowersTwo);
+    if (diff5 > 0){
+      this.duelArgsOne.push(diff5 * 4);
+      this.duelArgsTwo.push(0);
+    } else {
+      this.duelArgsOne.push(0);
+      this.duelArgsTwo.push(diff5 * -4);
+    }
+
+    const diff6 = Number(this.userFollowingOne) - Number(this.userFollowingTwo);
+    if (diff6 > 0){
+      this.duelArgsOne.push(diff6);
+      this.duelArgsTwo.push(0);
+    } else {
+      this.duelArgsOne.push(0);
+      this.duelArgsTwo.push(diff6 * -1);
+    }
+    
+    this.duelArgsOne.forEach( (element) => {
+      this.totalPointsOne += element;
+    })
+
+    this.duelArgsTwo.forEach( (element) => {
+      this.totalPointsTwo += element;
+    })
+
+    this.cards.forEach(cardInstance => cardInstance.changeColors());
+
+    if (this.totalPointsOne > this.totalPointsTwo) {
+
+    }
   }
 }

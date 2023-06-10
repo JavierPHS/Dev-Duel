@@ -18,4 +18,40 @@
   <br />
   <br />
   <button class="submit-button" (click)="onSubmit()">Duel</button>
+
+  <div class="duel-cards">
+    <div class="duel-card-left">
+      <app-card
+        [passedUsername]="userOne"
+        [passedUserImageSrc]="userImageSrcOne"
+        [passedUserBio]="userBioOne"
+        [passedUserRealName]="userRealNameOne"
+        [passedUserLocation]="userLocationOne"
+        [passedUserTitles]="userTitlesOne"
+        [passedFavLanguage]="favLanguageOne"
+        [passedTotalStars]="totalStarsOne"
+        [passedHighestStars]="highestStarsOne"
+        [passedPublicRepos]="publicReposOne"
+        [passedPerfectRepos]="perfectReposOne"
+        [passedUserFollowers]="userFollowersOne"
+        [passedUserFollowing]="userFollowingOne"></app-card>
+    </div>
+
+    <div class="duel-card-right">
+      <app-card
+      [passedUsername]="userTwo"
+      [passedUserImageSrc]="userImageSrcTwo"
+      [passedUserBio]="userBioTwo"
+      [passedUserRealName]="userRealNameTwo"
+      [passedUserLocation]="userLocationTwo"
+      [passedUserTitles]="userTitlesTwo"
+      [passedFavLanguage]="favLanguageTwo"
+      [passedTotalStars]="totalStarsTwo"
+      [passedHighestStars]="highestStarsTwo"
+      [passedPublicRepos]="publicReposTwo"
+      [passedPerfectRepos]="perfectReposTwo"
+      [passedUserFollowers]="userFollowersTwo"
+      [passedUserFollowing]="userFollowingTwo"></app-card>
+    </div>
+  </div>
 </div>

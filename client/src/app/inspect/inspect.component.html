@@ -10,4 +10,21 @@
   <br />
   <br />
   <button class="submit-button" (click)="onSubmit()">Inspect</button>
+
+  <app-card
+    [passedUsername]="username"
+    [passedUserImageSrc]="userImageSrc"
+    [passedUserBio]="userBio"
+    [passedUserRealName]="userRealName"
+    [passedUserLocation]="userLocation"
+    [passedUserTitles]="userTitles"
+    [passedFavLanguage]="favLanguage"
+    [passedTotalStars]="totalStars"
+    [passedHighestStars]="highestStars"
+    [passedPublicRepos]="publicRepos"
+    [passedPerfectRepos]="perfectRepos"
+    [passedUserFollowers]="userFollowers"
+    [passedUserFollowing]="userFollowing"
+  ></app-card>>
+
 </div>

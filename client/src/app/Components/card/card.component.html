@@ -1,0 +1,53 @@
+<div class="inspect-container">
+    <div class="inspect-image">
+      <img id="avatarImage" [src]="passedUserImageSrc">
+      <p id="avatarBio"> {{ passedUserBio }}</p>
+    </div>
+
+    <div class="inspect-stats">
+      <div class="stat">
+        <p class="label">username</p>
+        <p class="value">{{ passedUsername }}</p>
+      </div>
+      <div class="stat">
+        <p class="label">name</p>
+        <p class="value">{{ passedUserRealName }}</p>
+      </div>
+      <div class="stat">
+        <p class="label">location</p>
+        <p class="value">{{ passedUserLocation }}</p>
+      </div>
+      <div class="stat">
+        <p class="label">titles</p>
+        <p class="value">{{ passedUserTitles }}</p>
+      </div>
+      <div class="stat">
+        <p class="label">fav language</p>
+        <p class="value">{{ passedFavLanguage }}</p>
+      </div>
+      <div class="stat">
+        <p class="label">total stars</p>
+        <p class="value">{{ passedTotalStars }}</p>
+      </div>
+      <div class="stat">
+        <p class="label">highest star count</p>
+        <p class="value">{{ passedHighestStars }}</p>
+      </div>
+      <div class="stat">
+        <p class="label">public repos</p>
+        <p class="value">{{ passedPublicRepos }}</p>
+      </div>
+      <div class="stat">
+        <p class="label">perfect repos</p>
+        <p class="value">{{ passedPerfectRepos }}</p>
+      </div>
+      <div class="stat">
+        <p class="label">followers</p>
+        <p class="value">{{ passedUserFollowers }}</p>
+      </div>
+      <div class="stat">
+        <p class="label">following</p>
+        <p class="value">{{ passedUserFollowing }}</p>
+      </div>
+    </div>
+  </div>

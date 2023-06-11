@@ -8,7 +8,10 @@ import { UserService } from 'src/user.service';
 })
 export class InspectComponent implements OnInit {
 
-  @Input()  username: string = ""
+  username: string = ""
+  card: boolean = false;
+
+  @Input()  user: string = ""
   @Input()  userImageSrc: string = ""
   @Input()  userBio: string = ""
   @Input()  userRealName: string = ""
@@ -32,10 +35,21 @@ export class InspectComponent implements OnInit {
   }
 
   async onSubmit() {
+
+    if (this.handleErrors()) {
+      return;
+    }
+
+    let temp = document.getElementById("error");
+    if (temp) {
+      temp.textContent = ("");
+    }
+
     try {
     const data = await this.userService.inspectUser(this.username);
 
-    if (data && typeof data === 'object' && 'avatar_url' in data && 'bio' in data) {
+    if (data && typeof data === 'object' && 'avatar_url' in data && 'bio' in data && 'username' in data) {
+      this.user = data['username'] as string;
       this.userImageSrc = data['avatar_url'] as string;
       this.userBio = data['bio'] as string;
       if ('name' in data) {
@@ -68,10 +82,24 @@ export class InspectComponent implements OnInit {
       if ('following' in data) {
         this.userFollowing = data['following'] as string;
       }
+      
+      this.card = true;
     }
     
     } catch (error) {
-      console.log('Error when fetching assigning Image and Bio');
+      let temp = document.getElementById("error");
+      if (temp) {
+        temp.textContent = ("ERROR: "+error);
+      }
     }
+  }
+
+  handleErrors(): boolean {
+    let temp = document.getElementById("error");
+    if (temp !== null && this.username === "") {
+      temp.textContent = "ERROR: You need to enter two usernames. Try again.";
+      return true;
+    }
+    return false;
   }
 }

@@ -11,8 +11,10 @@
   <br />
   <button class="submit-button" (click)="onSubmit()">Inspect</button>
 
-  <app-card
-    [passedUsername]="username"
+  <h1 id="error"></h1>
+
+  <app-card *ngIf = "card"
+    [passedUsername]="user"
     [passedUserImageSrc]="userImageSrc"
     [passedUserBio]="userBio"
     [passedUserRealName]="userRealName"
@@ -25,6 +27,6 @@
     [passedPerfectRepos]="perfectRepos"
     [passedUserFollowers]="userFollowers"
     [passedUserFollowing]="userFollowing"
-  ></app-card>>
+  ></app-card>
 
 </div>

@@ -146,6 +146,16 @@
     align-items: center;
     text-align: center;
     }
+
+    .points {
+      box-sizing: border-box;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #00760a;
+      }
     
     .inspect-image{
       position:absolute;

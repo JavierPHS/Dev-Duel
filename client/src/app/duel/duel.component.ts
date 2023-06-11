@@ -17,20 +17,10 @@ export class DuelComponent implements OnInit {
   usernameTwo: string = ""
   totalPointsOne: number = 0
   totalPointsTwo: number = 0
-
-  // @Input()  username: string[] = []
-  // @Input()  userImageSrc: string[] = []
-  // @Input()  userBio: string[] = []
-  // @Input()  userRealName: string[] = []
-  // @Input()  userLocation: string[] = []
-  // @Input()  userTitles: UserTitles = { userOne: [], userTwo: [] }
-  // @Input()  favLanguage: string[] = []
-  // @Input()  totalStars: string[] = []
-  // @Input()  highestStars: string[] = []
-  // @Input()  publicRepos: string[] = []
-  // @Input()  perfectRepos: string[] = []
-  // @Input()  userFollowers: string[] = []
-  // @Input()  userFollowing: string[] = []
+  profile1: boolean = false;
+  profile2: boolean = false;
+  leftCard: boolean = false;
+  rightCard: boolean = false;
 
   @Input()  userOne: string = ""
   @Input()  userImageSrcOne: string = ""
@@ -62,6 +52,8 @@ export class DuelComponent implements OnInit {
   @Input()  userFollowingTwo: string = ""
   @Input()  duelArgsTwo: number[] = []
 
+
+
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
@@ -75,62 +67,33 @@ export class DuelComponent implements OnInit {
     this.usernameTwo = valueEmitted;
   }
 
-  // async onSubmit() {
-  //   try {
-  //     const data = [await this.userService.duelUsers(this.usernameOne, this.usernameTwo)];
-  //     data.forEach((user, index) =>  {
-  //       if (user && typeof user === 'object' && 'avatar_url' in user && 'bio' in user) {
-  //         this.userImageSrc[index] = user['avatar_url'] as string;
-  //         this.userBio[index] = user['bio'] as string;
-  //         if ('name' in user) {
-  //           this.userRealName[index] = user['name'] as string;
-  //         }
-  //         if ('location' in user) {
-  //           this.userLocation[index] = user['location'] as string;
-  //         }
-  //         if ('titles' in user && index === 0) {
-  //           this.userTitles.userOne.push(user['titles'] as string);
-  //         }
-  //         else if ('titles' in user && index === 1) {
-  //           this.userTitles.userTwo.push(user['titles'] as string);
-  //         }
-  //         if ('favorite-language' in user) {
-  //           this.favLanguage[index] = user['favorite-language'] as string;
-  //         }
-  //         if ('total-stars' in user) {
-  //           this.totalStars[index] = user['total-stars'] as string;
-  //         }
-  //         if ('highest-starred' in user) {
-  //           this.highestStars[index] = user['highest-starred'] as string;
-  //         }
-  //         if ('public-repos' in user) {
-  //           this.publicRepos[index] = user['public-repos'] as string;
-  //         }
-  //         if ('perfect-repos' in user) {
-  //           this.perfectRepos[index] = user['perfect-repos'] as string;
-  //         }
-  //         if ('followers' in user) {
-  //           this.userFollowers[index] = user['followers'] as string;
-  //         }
-  //         if ('following' in user) {
-  //           this.userFollowing[index] = user['following'] as string;
-  //         }
-  //       }
-  //     });
-      
-  //     } catch (error) {
-  //       console.log('Error when fetching assigning Image and Bio');
-  //     }
-  // }
-
   async onSubmit() {
+    this.profile1 = false;
+    this.profile2 = false;
+    this.leftCard = false;
+    this.rightCard = false;
+
+    if (this.handleErrors()) {
+      return;
+    }
+
+    let temp = document.getElementById("error");
+    if (temp) {
+      temp.textContent = ("");
+    }
+
     try {
+      this.duelArgsOne = [];
+      this.duelArgsTwo = [];
+
+      this.leftCard = true;
+      this.rightCard = true;
+
       const data = [await this.userService.duelUsers(this.usernameOne, this.usernameTwo)];
       const users = data[0];
 
       if (Array.isArray(users)) {
         users.forEach((user, index) =>  {
-          console.log(user);
           if (user && typeof user === 'object' && 'avatar_url' in user && 'bio' in user && 'username' in user && index === 0) {
             this.userOne = user['username'] as string;
             this.userImageSrcOne = user['avatar_url'] as string;
@@ -204,11 +167,15 @@ export class DuelComponent implements OnInit {
           }
         });
       }
-      
+
+
       this.decideWinner()
 
       } catch (error) {
-        console.log('Error when fetching assigning Image and Bio');
+        let temp = document.getElementById("error");
+        if (temp) {
+          temp.textContent = ("ERROR: " + error);
+        }
       }
   }
 
@@ -277,9 +244,21 @@ export class DuelComponent implements OnInit {
     })
 
     this.cards.forEach(cardInstance => cardInstance.changeColors());
+    (this.totalPointsOne > this.totalPointsTwo)
+      ? this.profile1 = true
+      : this.profile2 = true
+  }
 
-    if (this.totalPointsOne > this.totalPointsTwo) {
-
+  handleErrors(): boolean {
+    let temp = document.getElementById("error");
+    if (this.usernameOne === this.usernameTwo && temp !== null) {
+      temp.textContent = "ERROR: You entered the same username twice. Try again.";
+      return true;
     }
+    if (temp !== null && (this.usernameOne === "" || this.usernameTwo === "")) {
+      temp.textContent = "ERROR: You need to enter two usernames. Try again.";
+      return true;
+    }
+    return false;
   }
 }

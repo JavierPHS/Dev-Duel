@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-card',
@@ -22,57 +22,75 @@ export class CardComponent implements OnInit {
   @Input()  passedUserFollowing: string = ""
   @Input()  passedDuelArgs: number[] = [];
 
-  constructor() { }
+  totalStarPoints: string = "";
+  highestStarPoints: string = "";
+  publicPoints: string = "";
+  perfectPoints: string = "";
+  followerPoints: string = "";
+  followingPoints: string = "";
+
+  constructor(private elementRef: ElementRef) { }
 
   ngOnInit(): void {
   }
 
   changeColors() {
-    //console.log(this.passedDuelArgs)
+    this.totalStarPoints = '';
+    this.highestStarPoints = '';
+    this.publicPoints = '';
+    this.perfectPoints = '';
+    this.followerPoints = '';
+    this.followingPoints = '';
+    
     this.passedDuelArgs.forEach((value, index) => {
-      console.log(index);
       switch (index) {
         case 0:
-          let temp1 = document.getElementById('label-total-stars') as HTMLElement;
-          (value > 0)
-          ? temp1.style.setProperty('background', '#b3ffb9')
-          : temp1.style.setProperty('background', '#ffb3b3')
+          this.setLabelBackground('label-total-stars', value);
+          if (value > 0) {
+            this.totalStarPoints = ("+"+value);
+          }
           break;
         case 1:
-          let temp2 = document.getElementById('label-highest-stars') as HTMLElement;
-          (value > 0)
-          ? temp2.style.setProperty('background', '#b3ffb9')
-          : temp2.style.setProperty('background', '#ffb3b3')
+          this.setLabelBackground('label-highest-stars', value);
+          if (value > 0) {
+            this.highestStarPoints = ("+"+value);
+          }
           break;
         case 2:
-          let temp3 = document.getElementById('label-public') as HTMLElement;
-          (value > 0)
-          ? temp3.style.setProperty('background', '#b3ffb9')
-          : temp3.style.setProperty('background', '#ffb3b3')
+          this.setLabelBackground('label-public', value);
+          if (value > 0) {
+            this.publicPoints = ("+"+value);
+          }
           break;
         case 3:
-          let temp4 = document.getElementById('label-perfect') as HTMLElement;
-          (value > 0)
-          ? temp4.style.setProperty('background', '#b3ffb9')
-          : temp4.style.setProperty('background', '#ffb3b3')
+          this.setLabelBackground('label-perfect', value);
+          if (value > 0) {
+            this.perfectPoints = ("+"+value);
+          }
           break;
         case 4:
-          //console.log(value)
-          let temp5 = document.getElementById('label-followers') as HTMLElement;
-          (value > 0)
-          ? temp5.style.setProperty('background', '#b3ffb9')
-          : temp5.style.setProperty('background', '#ffb3b3')
+          this.setLabelBackground('label-followers', value);
+          if (value > 0) {
+            this.followerPoints = ("+"+value);
+          }
           break;
         case 5:
-          let temp6 = document.getElementById('label-following') as HTMLElement;
-          (value > 0)
-          ? temp6.style.setProperty('background', '#b3ffb9')
-          : temp6.style.setProperty('background', '#ffb3b3')
+          this.setLabelBackground('label-following', value);
+          if (value > 0) {
+            this.followingPoints = ("+"+value);
+          }
           break;
         default:
           break;
       }
-    })
+    });
+  }
+
+  private setLabelBackground(labelId: string, value: number) {
+    const labelElement = this.elementRef.nativeElement.querySelector(`#${labelId}`);
+    if (labelElement) {
+      labelElement.style.setProperty('background', value > 0 ? '#b3ffb9' : '#ffb3b3');
+    }
   }
 
 }

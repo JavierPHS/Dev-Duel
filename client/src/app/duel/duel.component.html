@@ -20,13 +20,14 @@
   <button class="submit-button" (click)="onSubmit()">Duel</button>
 
   <div class="banners">
-    <!-- <app-win-banner class = "banner-left"></app-win-banner>
-    <app-win-banner class = "banner-right"></app-win-banner> -->
+    <h1 id="error"></h1>
+    <app-win-banner class = "banner-left" *ngIf="profile1"></app-win-banner>
+    <app-win-banner class = "banner-right" *ngIf="profile2"></app-win-banner>
   </div>
 
   <div class="duel-cards">
     <div class="duel-card-left">
-      <app-card
+      <app-card *ngIf="leftCard"
         [passedUsername]="userOne"
         [passedUserImageSrc]="userImageSrcOne"
         [passedUserBio]="userBioOne"
@@ -44,7 +45,7 @@
     </div>
 
     <div class="duel-card-right">
-      <app-card
+      <app-card *ngIf="rightCard"
       [passedUsername]="userTwo"
       [passedUserImageSrc]="userImageSrcTwo"
       [passedUserBio]="userBioTwo"
